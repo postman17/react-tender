@@ -1,0 +1,4 @@
+export const LSKeys = {
+  ACCESS_TOKEN: 'ACCESS_TOKEN',
+  REFRESH_TOKEN: 'REFRESH_TOKEN',
+};
