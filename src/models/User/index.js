@@ -3,10 +3,11 @@ import {combine} from "effector";
 import {getCurrentUserSign} from 'src/api/signatures/User';
 
 
-export const $firstName = appDomain.createStore('', { name: 'firstName' });
-export const $lastName = appDomain.createStore('', { name: 'lastName' });
-export const $middleName = appDomain.createStore('', { name: 'middleName' });
-export const $role = appDomain.createStore('', { name: 'role' });
+export const $userData= appDomain.createStore('', { name: 'userData' });
+export const $firstName = $userData.map(item => item.first_name)
+export const $lastName = $userData.map(item => item.last_name)
+export const $middleName = $userData.map(item => item.middle_name)
+export const $role = $userData.map(item => item.role)
 
 export const $userFullName = combine(
     $firstName, $lastName, $middleName,

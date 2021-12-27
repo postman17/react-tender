@@ -1,15 +1,38 @@
+import {useEffect} from "react";
 import {useStore} from "effector-react";
-import {$userFullName, $role} from 'src/models/User';
+import {CircularProgress, Grid} from "@material-ui/core";
+import {Stack} from "@mui/material";
+import Container from "@mui/material/Container";
+import {$tenders, setCurrentPageFn} from 'src/models/Tender';
+import {PaginationRow} from './children/Pagination/Pagination';
+import {Tender} from './children/Tender/Tender';
 
 
 const Default = () => {
-    const userData = useStore($userFullName);
-    const role = useStore($role);
+    useEffect(() => {
+        setCurrentPageFn();
+    }, [])
+    const tenders = useStore($tenders);
+    if (!tenders) {
+        return (
+            <CircularProgress />
+        )
+    }
     return (
-        <>
-            <h1>Hello - {userData}</h1>
-            <h2>Role - {role}</h2>
-        </>
+        <Container maxWidth="xl">
+            <Grid container direction="column" alignItems="center" justify="center" sx={{ marginTop: 5 }} spacing={2}>
+                <Stack spacing={1}>
+                    {tenders.map((item, index)=>{
+                        return (
+                            <Grid item style={{ width: '70%'}} key={index}>
+                                <Tender {...item}/>
+                            </Grid>
+                        )
+                    })}
+                    <PaginationRow />
+                </Stack>
+            </Grid>
+        </Container>
     )
 }
 
