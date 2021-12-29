@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import {
     $tendersPagesCount, $currentPage,
     setCurrentPageFn
-} from 'src/models/Tender';
+} from 'src/models/Tender/List';
 
 const PaginationRow = () => {
     const pagesCount = useStore($tendersPagesCount)
